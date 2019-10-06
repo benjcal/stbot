@@ -54,7 +54,7 @@ StartTrade:
 }
 
 func trade(e, w, l float64) float64 {
-	res, _ := http.Get("https://poloniex.com/public?command=returnOrderBook&currencyPair=USDC_BTC&depth=3")
+	res, _ := http.Get("https://poloniex.com/public?command=returnOrderBook&currencyPair=USDC_BTC&depth=1")
 	body, _ := ioutil.ReadAll(res.Body)
 
 	j := gjson.GetBytes(body, "bids")
@@ -69,12 +69,12 @@ func trade(e, w, l float64) float64 {
 		bids += f
 	}
 
-	return bids / 3
+	return bids / 1
 
 }
 
 func getEntry() float64 {
-	res, _ := http.Get("https://poloniex.com/public?command=returnOrderBook&currencyPair=USDC_BTC&depth=3")
+	res, _ := http.Get("https://poloniex.com/public?command=returnOrderBook&currencyPair=USDC_BTC&depth=1")
 	body, _ := ioutil.ReadAll(res.Body)
 
 	j := gjson.GetBytes(body, "asks")
@@ -89,7 +89,7 @@ func getEntry() float64 {
 		asks += f
 	}
 
-	return asks / 3
+	return asks / 1
 }
 
 func percent(n float64) float64 {
