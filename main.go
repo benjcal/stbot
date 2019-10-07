@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	tm "github.com/buger/goterm"
 	"github.com/tidwall/gjson"
 	"io/ioutil"
@@ -10,6 +11,8 @@ import (
 )
 
 func main() {
+	var winMargin = flag.Float64("win margin in percent", 1.5, "enter margin to call a win")
+	flag.Parse()
 	tm.Clear()
 	entry := 0.0
 	winExit := 0.0
@@ -21,11 +24,12 @@ StartTrade:
 	entry = getEntry()
 	entry = entry + (entry * percent(0.01))
 
-	winExit = entry + (entry * percent(1.4))
+	winExit = entry + (entry * percent(*winMargin))
 	loseExit = entry - (entry * percent(0.4))
 
 	for {
 		tm.Printf("------------------------------------\n\n")
+		tm.Printf("Margin: %.3f\n", *winMargin)
 		tm.Printf("Wins: %v\n", wins)
 		tm.Printf("Loses: %v\n\n", loses)
 		tm.Printf("Entry:       %f\n", entry)
