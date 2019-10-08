@@ -6,8 +6,6 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"stbot/poloniex"
-	"stbot/trade"
 )
 
 type config struct {
@@ -32,7 +30,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	p := poloniex.NewClient(c.Key, c.Secret)
+	//p := poloniex.NewClient(c.Key, c.Secret)
 
-	trade.Run(p)
+	//trade.Run(p)
 }
