@@ -14,9 +14,9 @@ import (
 	"time"
 )
 
-func (c *Client) Buy(currencyPair string, rate, vol float64) error {
+func (c *Client) Buy(currencyPair string, rate, amount float64) error {
 	nonce := time.Now().UnixNano()
-	data := fmt.Sprintf("command=buy&currencyPair=%v&rate=%f&amount=%f&fillOrKill=1&immediateOrCancel=1&nonce=%v", currencyPair, rate, vol, nonce)
+	data := fmt.Sprintf("command=buy&currencyPair=%v&rate=%f&amount=%f&fillOrKill=1&immediateOrCancel=1&nonce=%v", currencyPair, rate, amount, nonce)
 
 	req, err := http.NewRequest(http.MethodPost, "https://poloniex.com/tradingApi", strings.NewReader(data))
 	if err != nil {
